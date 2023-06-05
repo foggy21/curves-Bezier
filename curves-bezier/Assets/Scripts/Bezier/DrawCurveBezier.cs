@@ -5,7 +5,7 @@ public class DrawCurveBezier : MonoBehaviour
 {
     [SerializeField] private CurveBezier typeOfCurveBezier;
     [SerializeField] private List<Transform> pointsOfCurve;
-
+    public CurveBezier TypeOfCurveBezier { get => typeOfCurveBezier; }
     public List<Transform> PointsOfCurve { get => pointsOfCurve; }
 
     private void OnDrawGizmos()
@@ -17,20 +17,24 @@ public class DrawCurveBezier : MonoBehaviour
         {
             float t = (float)i / segmentsNumber;
             Vector3 point = Vector3.zero;
-            if (typeOfCurveBezier == CurveBezier.Cubic)
+            switch (typeOfCurveBezier)
             {
-                point = Bezier.GetPointOnCubicCurveBezier(PointsOfCurve[0].position, PointsOfCurve[1].position,
+                case CurveBezier.Cubic:
+                    point = Bezier.GetPointOnCubicCurveBezier(PointsOfCurve[0].position, PointsOfCurve[1].position,
                     PointsOfCurve[2].position, PointsOfCurve[3].position, t);
+                    break;
+                case CurveBezier.Quadratic:
+                    point = Bezier.GetPointOnQuadraticCurveBezier(PointsOfCurve[0].position, PointsOfCurve[1].position,
+                        PointsOfCurve[2].position, t);
+                    break;
             }
             Gizmos.DrawLine(prevPoint, point);
             prevPoint = point;
         }
     }
-
-
-    private enum CurveBezier
-    {
-        Cubic,
-        Square
-    }
+}
+public enum CurveBezier
+{
+    Cubic,
+    Quadratic
 }

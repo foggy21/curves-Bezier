@@ -3,32 +3,49 @@ using UnityEngine;
 
 public class MovingBezierObject : MonoBehaviour
 {
-    [SerializeField] private GameObject curveBezier;
+    [SerializeField] private GameObject curve;
 
     [SerializeField] private float speed;
 
     private List<Transform> pointsOfCurveBezier;
+    private CurveBezier typeOfCurveBezier;
 
     private float t;
 
-    public GameObject CurveBezier { get => curveBezier; set { } }
+    public GameObject Curve { get => curve; set { } }
 
     private void Start()
     {
         pointsOfCurveBezier = GetPointsFromCurveBezier();
+        typeOfCurveBezier = GetTypeOfCurveBezier();
     }
             
     private void Update()
     {
         t += speed * Time.deltaTime;
         Debug.Log(t + " " + Time.deltaTime);
-        transform.position = Bezier.GetPointOnCubicCurveBezier(pointsOfCurveBezier[0].position, pointsOfCurveBezier[1].position,
+
+        switch (typeOfCurveBezier)
+        {
+            case CurveBezier.Cubic:
+                transform.position = Bezier.GetPointOnCubicCurveBezier(pointsOfCurveBezier[0].position, pointsOfCurveBezier[1].position,
             pointsOfCurveBezier[2].position, pointsOfCurveBezier[3].position, t);
-        
+                break;
+            case CurveBezier.Quadratic:
+                transform.position = Bezier.GetPointOnQuadraticCurveBezier(pointsOfCurveBezier[0].position, pointsOfCurveBezier[1].position,
+            pointsOfCurveBezier[2].position, t);
+                break;
+
+        }   
     }
 
     private List<Transform> GetPointsFromCurveBezier()
     {
-        return CurveBezier.GetComponentInChildren<DrawCurveBezier>().PointsOfCurve;
+        return Curve.GetComponentInChildren<DrawCurveBezier>().PointsOfCurve;
+    }
+
+    private CurveBezier GetTypeOfCurveBezier()
+    {
+        return Curve.GetComponent<DrawCurveBezier>().TypeOfCurveBezier;
     }
 }

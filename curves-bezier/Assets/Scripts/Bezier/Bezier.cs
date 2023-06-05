@@ -15,4 +15,14 @@ public static class Bezier
 
         return pointABCD;
     }
+
+    public static Vector3 GetPointOnQuadraticCurveBezier(Vector3 pointA, Vector3 pointB, Vector3 pointC, float t)
+    {
+        Vector3 pointAB = Vector3.Lerp(pointA, pointB, t);
+        Vector3 pointBC = Vector3.Lerp(pointB, pointC, t);
+
+        Vector3 pointABC = Vector3.Lerp(pointAB, pointBC, t);
+
+        return pointABC;
+    }
 }
