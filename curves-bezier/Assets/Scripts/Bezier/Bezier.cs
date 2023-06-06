@@ -26,3 +26,9 @@ public static class Bezier
         return pointABC;
     }
 }
+
+public enum CurveBezier
+{
+    Cubic,
+    Quadratic
+}

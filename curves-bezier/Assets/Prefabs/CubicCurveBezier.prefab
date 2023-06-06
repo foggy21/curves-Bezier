@@ -49,7 +49,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfCurveBezier: 0
-  pointsOfCurve: []
+  pointsOfCurve:
+  - {fileID: 4819590084638240754}
+  - {fileID: 7140144046248766606}
+  - {fileID: 7140144047590694129}
+  - {fileID: 7140144046481866140}
 --- !u!1001 &38329758789103571
 PrefabInstance:
   m_ObjectHideFlags: 0

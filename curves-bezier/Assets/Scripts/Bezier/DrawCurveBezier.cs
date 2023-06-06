@@ -33,8 +33,4 @@ public class DrawCurveBezier : MonoBehaviour
         }
     }
 }
-public enum CurveBezier
-{
-    Cubic,
-    Quadratic
-}
+

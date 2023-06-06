@@ -349,6 +349,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/Bezier/Bezier.cs"
 "Assets/Scripts/Bezier/DrawCurveBezier.cs"
+"Assets/Scripts/Bezier/DrawSplineBezier.cs"
 "Assets/Scripts/MovingBezierObject/MovingBezierObject.cs"
 -langversion:9.0
 
