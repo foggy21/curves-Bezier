@@ -1,13 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawCurveBezier : MonoBehaviour
+public class DrawCurveBezier : CurveBezier
 {
-    [SerializeField] private CurveBezier typeOfCurveBezier;
-    [SerializeField] private List<Transform> pointsOfCurve;
-    public CurveBezier TypeOfCurveBezier { get => typeOfCurveBezier; }
-    public List<Transform> PointsOfCurve { get => pointsOfCurve; }
-
     private void OnDrawGizmos()
     {
         int segmentsNumber = 100;
@@ -17,20 +12,25 @@ public class DrawCurveBezier : MonoBehaviour
         {
             float t = (float)i / segmentsNumber;
             Vector3 point = Vector3.zero;
-            switch (typeOfCurveBezier)
+            switch (bezierType)
             {
-                case CurveBezier.Cubic:
-                    point = Bezier.GetPointOnCubicCurveBezier(PointsOfCurve[0].position, PointsOfCurve[1].position,
+                case BezierType.Cubic:
+                    point = GetPointOnCubicCurveBezier(PointsOfCurve[0].position, PointsOfCurve[1].position,
                     PointsOfCurve[2].position, PointsOfCurve[3].position, t);
                     break;
-                case CurveBezier.Quadratic:
-                    point = Bezier.GetPointOnQuadraticCurveBezier(PointsOfCurve[0].position, PointsOfCurve[1].position,
+                case BezierType.Quadratic:
+                    point = GetPointOnQuadraticCurveBezier(PointsOfCurve[0].position, PointsOfCurve[1].position,
                         PointsOfCurve[2].position, t);
+                    break;
+                default:
+                    Debug.LogError($"Curve bezier {gameObject.name} has to have cubic or quadratic type");
                     break;
             }
             Gizmos.DrawLine(prevPoint, point);
             prevPoint = point;
         }
     }
+
+    
 }
 

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public static class Bezier
+public class Bezier : MonoBehaviour
 {
-    public static Vector3 GetPointOnCubicCurveBezier(Vector3 pointA, Vector3 pointB, Vector3 pointC, Vector3 pointD, float t)
+    protected Vector3 GetPointOnCubicCurveBezier(Vector3 pointA, Vector3 pointB, Vector3 pointC, Vector3 pointD, float t)
     {
         Vector3 pointAB = Vector3.Lerp(pointA, pointB, t);
         Vector3 pointBC = Vector3.Lerp(pointB, pointC, t);
@@ -16,7 +16,7 @@ public static class Bezier
         return pointABCD;
     }
 
-    public static Vector3 GetPointOnQuadraticCurveBezier(Vector3 pointA, Vector3 pointB, Vector3 pointC, float t)
+    protected Vector3 GetPointOnQuadraticCurveBezier(Vector3 pointA, Vector3 pointB, Vector3 pointC, float t)
     {
         Vector3 pointAB = Vector3.Lerp(pointA, pointB, t);
         Vector3 pointBC = Vector3.Lerp(pointB, pointC, t);
@@ -27,8 +27,9 @@ public static class Bezier
     }
 }
 
-public enum CurveBezier
+public enum BezierType
 {
     Cubic,
-    Quadratic
+    Quadratic,
+    Spline
 }
